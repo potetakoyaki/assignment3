@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <h1>User info</h1>
+      <%= attachment_image_tag @user, :profile_image, :fill, 30,30, fallback: "no_image.jpg" %>
+      <table class="table ">
+        <tbody>
+          <tr>
+            <td>name</td>
+            <td><%= @user.name %></td>
+          </tr>
+          <tr>
+            <td>introduction</td>
+            <td><%= @user.introduction %></td>
+          </tr>
+        </tbody>
+      </table>
+      <%= link_to edit_user_path(@user.id), class: "btn btn-light btn-block" do %><i class="fas fa-user-cog"></i><% end %>
+      <%= render "books/list", book: @book %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <h1>Books</h1>
+      <table class="table ">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Opinion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @book.each do |book| %>
+          <tr>
+            <td>
+              <%= link_to user_path(book.user) do %>
+                <%= attachment_image_tag @user, :profile_image, :size => "40x40", fallback: "no_image.jpg" %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to book_path(book) do %>
+                <%= book.title %>
+              <% end %>
+            </td>
+            <td><%= book.body %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </di>
+  </div>
+</div>
